@@ -141,7 +141,7 @@ class SolverTest {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         Solver solver = new Solver();
-        solver.Solve();
+        solver.solve();
         return outputStream.toString();
     }
 }

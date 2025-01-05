@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    id("application")
 }
 
 group = "org.example"
@@ -15,6 +16,19 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
+application {
+    mainClass.set("org.example.Main")
+}
+
+tasks.named("run", JavaExec::class) {
+    group = "application"
+    description = "Runs the program with standard input"
+    standardInput = System.`in`
+}
+
 tasks.test {
     useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
 }

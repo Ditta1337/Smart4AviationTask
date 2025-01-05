@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             Solver solver = new Solver();
-            solver.Solve();
+            solver.solve();
         } catch (InputParsingException e) {
             System.out.println("There was an error parsing the input: " + e.getMessage());
         }

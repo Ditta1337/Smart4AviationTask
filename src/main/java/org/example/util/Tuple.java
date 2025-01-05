@@ -1,21 +1,6 @@
 package org.example.util;
 
-public class Tuple<T, U> {
-    private final T first;
-    private final U second;
-
-    public Tuple(T first, U second) {
-        this.first = first;
-        this.second = second;
-    }
-
-    public T getFirst() {
-        return first;
-    }
-
-    public U getSecond() {
-        return second;
-    }
+public record Tuple<T, U>(T first, U second) {
 
     @Override
     public boolean equals(Object o) {
@@ -23,13 +8,6 @@ public class Tuple<T, U> {
         if (o == null || getClass() != o.getClass()) return false;
         Tuple<?, ?> tuple = (Tuple<?, ?>) o;
         return first.equals(tuple.first) && second.equals(tuple.second);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = first != null ? first.hashCode() : 0;
-        result = 31 * result + (second != null ? second.hashCode() : 0);
-        return result;
     }
 
     @Override

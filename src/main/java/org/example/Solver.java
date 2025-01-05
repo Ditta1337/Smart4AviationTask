@@ -37,7 +37,7 @@ public class Solver {
             int numberOfRoutes = Integer.parseInt(firstLineParts[0]);
             int numberOfActions = Integer.parseInt(firstLineParts[1]);
 
-            ParseInput(reader, numberOfRoutes, numberOfActions);
+            parseInput(reader, numberOfRoutes, numberOfActions);
         } catch (IOException e) {
             throw new InputParsingException("Error reading input.", e);
         } catch (NumberFormatException e) {
@@ -62,7 +62,7 @@ public class Solver {
 
             int numberOfRoutes = Integer.parseInt(firstLineParts[0]);
 
-            ParseInput(reader, numberOfRoutes, READ_ALL_ACTIONS);
+            parseInput(reader, numberOfRoutes, READ_ALL_ACTIONS);
         } catch (IOException e) {
             throw new InputParsingException("Error reading input.", e);
         } catch (NumberFormatException e) {
@@ -76,18 +76,18 @@ public class Solver {
     /**
      * Solve the instantiated problem.
      */
-    public void Solve() {
+    public void solve() {
         for (Tuple<Character, List<Long>> action : actions) {
-            List<Long> params = action.getSecond();
-            switch (action.getFirst()) {
+            List<Long> params = action.second();
+            switch (action.first()) {
                 case 'Q':
                     long sum = 0;
                     for (int plane = params.get(0).intValue(); plane <= params.get(1).intValue(); plane++) {
                         long time = params.get(2);
                         for (Tuple<Long, Integer> change : routes.get(plane - 1).reversed()) {
-                            if (change.getSecond() == 0) break;
-                            sum += (time - change.getFirst()) * change.getSecond();
-                            time = change.getFirst();
+                            if (change.second() == 0) break;
+                            sum += (time - change.first()) * change.second();
+                            time = change.first();
                         }
                     }
 
@@ -113,7 +113,7 @@ public class Solver {
      * @param numberOfActions Number of lines to read; use ALL_LINES to read all lines.
      * @throws InputParsingException if an error occurs during parsing.
      */
-    private void ParseInput(BufferedReader reader, int numberOfRoutes, int numberOfActions) throws InputParsingException {
+    private void parseInput(BufferedReader reader, int numberOfRoutes, int numberOfActions) throws InputParsingException {
         int lineCount = 0;
 
         try {
