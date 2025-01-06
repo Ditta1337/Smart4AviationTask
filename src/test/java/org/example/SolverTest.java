@@ -125,15 +125,19 @@ class SolverTest {
             String input1 = mockData.get("valid_input_1");
             String output1 = executeSolverWithInput(input1);
             String expectedOutput1 = mockData.get("valid_input_1_output");
-            assertEquals(expectedOutput1, output1);
+            assertEquals(normalizeEndings(expectedOutput1), normalizeEndings(output1));
 
             String input2 = mockData.get("valid_input_2");
             String output2 = executeSolverWithInput(input2);
             String expectedOutput2 = mockData.get("valid_input_2_output");
-            assertEquals(expectedOutput2, output2);
+            assertEquals(normalizeEndings(expectedOutput2), normalizeEndings(output2));
         } catch (InputParsingException e) {
             fail("Unexpected InputParsingException");
         }
+    }
+
+    private String normalizeEndings(String input) {
+        return input.replace("\r\n", "\n").replace("\r", "\n");
     }
 
     private String executeSolverWithInput(String input) throws InputParsingException {
